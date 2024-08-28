@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <!--Busque su emoji en https://www.w3schools.com/html/html_emojis.asp-->
+        <title>Learn Moving 🦾</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+        <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <p>
+                <a href="index.html">Bienvenidos</a>
+                <a href="page.html">FaceMesh</a>
+                <a href="page1.html">HandPose</a>
+                <a href="page2.html">BodyPose</a>
+                <a href="page3.html" class="activo">Body Segmentation</a>
+            </p>
+            <h1>Body Segmentation</h1>
+            <h2></h2>
+            <p></p>            
+        </header>
+        <main>
+        </main>
+
+        <script>
+            let bodySegmentation;
+            let options = {
+                maskType: "parts",
+            };
+
+            function preload() {
+                bodySegmentation = ml5.bodySegmentation("BodyPix", options);
+            }
+            
+            let video;
+
+            function setup() {
+                createCanvas(640, 480);
+                //selecciona un par de colores en https://materialui.co/colors
+                background('#90CAF9');
+                stroke('#1565C0');
+                video = createCapture(VIDEO);
+                video.size(640, 480);
+                video.hide();
+                bodySegmentation.detectStart(video, gotResults);
+            }
+
+            let segmentation;
+
+            function gotResults(result) {
+                segmentation = result;
+            } 
+            function draw() {
+                background('#90CAF9');
+                image(video, 0, 0);
+                if (segmentation) {
+                image(segmentation.mask, 0, 0, width, height);
+                }
+            }
+
+        </script>
+    </body>
+</html>

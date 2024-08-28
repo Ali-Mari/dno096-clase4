@@ -1,0 +1,63 @@
+            html,
+            body {
+                background: #90CAF9;
+                font-family: Montserrat, Poppins, sans-serif;
+                margin: 0;
+                padding: 0;
+                cursor: crosshair;
+            }
+
+            main{
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            canvas {
+                display: block;
+                box-shadow: 0 0 5px dimgray;
+            }
+            
+            header {
+                position: absolute;
+                top: 1rem;
+                left: 3rem;
+                z-index: 2;
+                width:calc(100vw * 0.618);
+            }
+
+            @media (orientation: landscape){
+                header {
+                    width:calc(100vw * 0.5);                    
+                }
+            }
+
+            p{
+                line-height:1.5;
+            }
+
+            code{
+                color:#455A64;
+                font-size:1rem;
+            }
+
+            aside{
+                z-index:2;
+                position: absolute;
+                left:1rem;
+                bottom:1rem;
+            }
+
+            a{
+                color:darkblue;
+                text-decoration: none;
+                margin-right: 2rem;
+            }
+
+            a.activo{
+                font-weight: bold;
+                text-decoration: underline;
+            }

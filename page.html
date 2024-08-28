@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <!--Busque su emoji en https://www.w3schools.com/html/html_emojis.asp-->
+        <title>Learn Moving 🦾</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+        <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <p>
+                <a href="index.html">Bienvenidos</a>
+                <a href="page.html" class="activo">FaceMesh</a>
+                <a href="page1.html">HandPose</a>
+                <a href="page2.html">BodyPose</a>
+                <a href="page3.html">Body Segmentation</a>
+            </p>
+            <h1>Face Mesh</h1>
+            <h2></h2>
+            <p></p>            
+        </header>
+        <main>
+        </main>
+        <script>
+            let faceMesh;
+            let options = { maxFaces: 1, refineLandmarks: false, flipped: false };
+
+            function preload() {
+                faceMesh = ml5.faceMesh(options);
+            }
+
+            let video;
+
+            function setup() { 
+                createCanvas(640, 480);
+                background('#90CAF9'); 
+                stroke('#1565C0');
+                video = createCapture(VIDEO);
+                video.size(640, 480);
+                video.hide(); 
+                faceMesh.detectStart(video, gotFaces);
+            }
+
+            let faces = [];
+
+            function gotFaces(results) {
+                faces = results;
+            }
+
+            function draw() {
+                image(video, 0, 0, width, height);
+                tint ('red')
+                for (let i = 0; i < faces.length; i++) {
+                    let face = faces[i];
+                    for (let j = 0; j < face.keypoints.length; j++) {
+                        let keypoint = face.keypoints[j];
+                        fill(0, 255, 0);
+                        noStroke();
+                        circle(keypoint.x, keypoint.y, 5);
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
